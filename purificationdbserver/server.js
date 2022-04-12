@@ -3,7 +3,8 @@ var express = require('express');
 const { CLIENT_RENEG_LIMIT } = require('tls');
 var app = express();
 
-var serverName = "DESKTOP-S8PA8GT\\SQLEXPRESS"
+var desktopServerName = "DESKTOP-S8PA8GT\\SQLEXPRESS"
+var laptopServerName = "LAPTOP-D4ETF9F5\\SQLEXPRESS"
 
 var offset = 0;
 
@@ -29,7 +30,7 @@ app.get('/rows', (req, res) => {
     var config = {
         user: 'sa',
         password: 'password',
-        server: serverName, 
+        server: laptopServerName, 
         database: 'purificationdb',
         synchronize: true,
         trustServerCertificate: true,
