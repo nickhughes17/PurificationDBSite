@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Table } from '../components/Table';
+import { HeaderBar } from '../components/HeaderBar'
 
 
 export const Database = () => {
@@ -38,9 +38,10 @@ export const Database = () => {
 
   return (
     <div>
-        <Table headers={headers} rows={rows}></Table>
-        <Link to="/Home">Home</Link>
-        <div id="table-refresh" className="table-refresh" data-url="/data"></div>
+        <HeaderBar currentPage={"Database"}></HeaderBar>
+        <div className="table-container">
+          <Table headers={headers} rows={rows}></Table>
+        </div>
         <button id="prevBtn" onClick={pageBack}>Back 10</button>
         <span id="pageNumber">{pageNumber}</span>
         <button id="nextBtn" onClick={pageForwards}>Next 10</button>

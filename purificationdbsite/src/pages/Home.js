@@ -1,19 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { HeaderBar } from '../components/HeaderBar'
 
-export default function home() {
+export const Home = () => {
   return (
     <div className='home'>
-        <header className="header">
-          <div className="header-contents">
-            <div className="logo"><p>Purification DB</p></div>
-            <ul id="list-1">
-              <li>
-                <Link to="/Database">Database</Link>
-              </li>
-            </ul>
-          </div>
-        </header>
+      <HeaderBar currentPage={"Home"}></HeaderBar>
         <div className="main">
           <div className="index-top-row">
               <h2>About</h2>
