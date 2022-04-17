@@ -21,14 +21,13 @@ export const Database = () => {
     const pageForwards = () => {
       if(pageNumber < MAX_PAGE_NUMBER){
         setPageNumber(pageNumber + 1);
-        //loag page
       }
     }
 
     useEffect(() => {
-      fetch(`http://localhost:5000/rows?offset=${(pageNumber-1)*ROWS_PER_PAGE}&rowsPerPage=${ROWS_PER_PAGE}`).then((res) => {
+      fetch(`http://localhost:5000/main?offset=${(pageNumber-1)*ROWS_PER_PAGE}&rowsPerPage=${ROWS_PER_PAGE}`).then((res) => {
         res.json().then((responseData) => {
-          setHeaders(responseData.headers)
+          setHeaders(responseData.headers);
           setRows(responseData.rows);
         });
         
