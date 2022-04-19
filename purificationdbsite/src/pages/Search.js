@@ -9,8 +9,7 @@ export const Search = () => {
   const [ rows, setRows ] = useState([]);
   const [ searchParams, setSearchParams ] = useState("");
   const [ errorText, setErrorText ] = useState("");
-  const [selectedDatabaseToSearch, setSelectedDatabaseToSearch] = useState("database1");
-  const ROWS_PER_PAGE = 10000;
+  const [selectedDatabaseToSearch, setSelectedDatabaseToSearch] = useState("protein");
 
     const searchDatabase = () => {
         //clear rows
@@ -20,8 +19,14 @@ export const Search = () => {
             setErrorText("");
             fetch(`http://localhost:5000/search?searchParams=${searchParams}&databaseToSearch=${selectedDatabaseToSearch}`).then((res) => {
               res.json().then((responseData) => {
-                setHeaders(responseData.headers);
-                setRows(responseData.rows);
+                if(responseData.errorMessage){
+                  setErrorText(responseData.errorMessage);
+                  setHeaders([]);
+                  setRows([]);
+                } else {
+                  setHeaders(responseData.headers);
+                  setRows(responseData.rows);
+                }
               });
             })
           } else {
@@ -44,31 +49,37 @@ export const Search = () => {
     <div>
         <HeaderBar currentPage={"Search"}></HeaderBar>
         <div className='search-bar-container'>
-            <input type="text" onChange={handleSearchChange} />
+            <input type="text" onChange={handleSearchChange} placeholder="Search..."/>
             <button id="searchBtn" onClick={searchDatabase}>SEARCH</button>
         </div>
         <div className="radio-container">
+          <div className="search-by">Search By: </div>
             {/** need to send value of radio button in fetch and search according to which, when getting which query to search through */}
             <input type="radio" 
                 value="protein" 
                 name="selection" 
                 checked={selectedDatabaseToSearch === "protein"}
                 onChange={handleRadioChange}
-                />Protein Name
+                />
+                <p>Protein</p>
             <input type="radio" 
                 value="sequence" 
                 name="selection" 
                 onChange={handleRadioChange}
                 checked={selectedDatabaseToSearch === "sequence"} 
-                />Sequence
+                />
+                <p>Sequence</p>
             <input type="radio" 
                 value="uniprot" 
                 name="selection" 
                 onChange={handleRadioChange}
                 checked={selectedDatabaseToSearch === "uniprot"} 
-            />UniProt
+                />
+                <p>UniProt</p>
         </div>
-        <div className="error-text">{errorText}</div>
+        <div className="error-container">
+          <div className="error-text">{errorText}</div>
+        </div>
         <div className="table-container">
             <Table headers={headers} rows={rows}></Table>
         </div>

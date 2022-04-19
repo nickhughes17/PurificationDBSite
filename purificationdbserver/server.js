@@ -347,20 +347,20 @@ app.get('/search', (req, res) => {
 
     // connect to your database
     sql.connect(config, function (err) {
-    
         if (err) console.log(err);
-
         // create Request object
         var request = new sql.Request();
-        
-
         if(databaseToSearch === "protein"){
             // query to the protein database and get the records
             request.query(proteinSearchQuery, function (err, response) {
-                if (err) console.log(err);
+                if(!response.recordset.length){
+                    return res.json({
+                        headers: [],
+                        rows: [],
+                        errorMessage: "No results found"
+                    })
+                } 
                 // send records as a response
-                
-
                 res.json({
                     headers: Object.keys(response.recordsets[0][0]),
                     rows: response.recordsets[0]
@@ -370,7 +370,13 @@ app.get('/search', (req, res) => {
             // query to the uniprot database and get the records
             //NEED TO REPLACE THE tempSearchQuery WITH EACH DB'S QUERY
             request.query(uniprotSearchQuery, function (err, response) {
-                if (err) console.log(err);
+               if(!response.recordset.length){
+                    return res.json({
+                        headers: [],
+                        rows: [],
+                        errorMessage: "No results found"
+                    })
+                } 
                 // send records as a response
                 res.json({
                     headers: Object.keys(response.recordsets[0][0]),
@@ -381,7 +387,13 @@ app.get('/search', (req, res) => {
             // query to the sequence database and get the records
             //NEED TO REPLACE THE tempSearchQuery WITH EACH DB'S QUERY
             request.query(sequenceSearchQuery, function (err, response) {
-                if (err) console.log(err);
+                if(!response.recordset.length){
+                    return res.json({
+                        headers: [],
+                        rows: [],
+                        errorMessage: "No results found"
+                    })
+                } 
                 // send records as a response
                 res.json({
                     headers: Object.keys(response.recordsets[0][0]),
@@ -506,8 +518,12 @@ app.get('/entry', (req, res) => {
         var request = new sql.Request();
         // query to the database and get the records
         request.query(entryQuery, function (err, response) {
-            if (err) console.log(err);
-            // send records as a response
+            if(err){
+                return res.json({
+                    headers: {},
+                    rows: {}
+                })
+            } 
             res.json({
                 headers: Object.keys(response.recordsets[0][0]),
                 rows: response.recordsets[0]

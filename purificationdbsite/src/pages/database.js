@@ -9,7 +9,7 @@ export const Database = () => {
   const [ headers, setHeaders ] = useState([]);
   const [ rows, setRows ] = useState([]);
   const MAX_PAGE_NUMBER = 100;
-  const ROWS_PER_PAGE = 10;
+  const ROWS_PER_PAGE = 13;
 
 
     const pageBack = () => {
@@ -40,9 +40,11 @@ export const Database = () => {
         <div className="table-container">
           <Table headers={headers} rows={rows}></Table>
         </div>
-        <button id="prevBtn" onClick={pageBack}>Back 10</button>
-        <span id="pageNumber">{pageNumber}</span>
-        <button id="nextBtn" onClick={pageForwards}>Next 10</button>
+        <div className="button-container">
+          <button id="prevBtn" onClick={pageBack}>Previous</button>
+          <span id="pageNumber">{pageNumber}</span>
+          <button id="nextBtn" onClick={pageForwards}>Next</button>
+        </div>
     </div>
   )
 }

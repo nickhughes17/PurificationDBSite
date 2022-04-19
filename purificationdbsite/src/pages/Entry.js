@@ -32,7 +32,9 @@ export const Entry = () => {
           <div className="table-container">
             <Table headers={headers} rows={rows}></Table>
           </div>
-          <button onClick={handleClick}>Back</button>
+          <div className="button-bar">
+            <button className='backButton' onClick={handleClick}>Back</button>
+          </div>
       </div>
     )
 }
