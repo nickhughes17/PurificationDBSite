@@ -121,7 +121,7 @@
 }
 
 .showText{
-  text-overflow: none;
+  max-width: fit-content;
   white-space: normal;
   overflow: visible;
   align-items: center;

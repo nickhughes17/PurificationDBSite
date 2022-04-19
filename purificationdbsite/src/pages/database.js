@@ -34,7 +34,6 @@ export const Database = () => {
       })
     }, [pageNumber]);
 
-
   return (
     <div>
         <HeaderBar currentPage={"Database"}></HeaderBar>

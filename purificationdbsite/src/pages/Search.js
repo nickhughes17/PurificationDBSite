@@ -10,8 +10,7 @@ export const Search = () => {
   const [ searchParams, setSearchParams ] = useState("");
   const [ errorText, setErrorText ] = useState("");
   const [selectedDatabaseToSearch, setSelectedDatabaseToSearch] = useState("database1");
-  const [ resultLength, setResultLength ] = useState(0);
-  const ROWS_PER_PAGE = resultLength + 1;
+  const ROWS_PER_PAGE = 10000;
 
     const searchDatabase = () => {
         //clear rows
@@ -19,17 +18,16 @@ export const Search = () => {
         if(searchParams !== ""){
           if(selectedDatabaseToSearch !== ""){
             setErrorText("");
-            fetch(`http://localhost:5000/search?offset=${0}&rowsPerPage=${ROWS_PER_PAGE}&searchParams=${searchParams}&databaseToSearch=${selectedDatabaseToSearch}`).then((res) => {
+            fetch(`http://localhost:5000/search?searchParams=${searchParams}&databaseToSearch=${selectedDatabaseToSearch}`).then((res) => {
               res.json().then((responseData) => {
                 setHeaders(responseData.headers);
                 setRows(responseData.rows);
-                setResultLength(responseData.queryLength);
               });
             })
           } else {
             setErrorText("Please select a database to search.");
           }
-        } else  if (searchParams == ""){
+        } else  if (searchParams === ""){
             setErrorText("Sorry, your search needs more information.");
         }
       }
