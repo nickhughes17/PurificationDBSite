@@ -33,7 +33,7 @@ app.get('/main', (req, res) => {
     var config = {
         user: 'sa',
         password: 'password',
-        server: desktopServerName, 
+        server: laptopServerName, 
         database: 'purificationdb',
         synchronize: true,
         trustServerCertificate: true,
@@ -339,7 +339,7 @@ app.get('/search', (req, res) => {
     var config = {
         user: 'sa',
         password: 'password',
-        server: desktopServerName, 
+        server: laptopServerName, 
         database: 'purificationdb',
         synchronize: true,
         trustServerCertificate: true,
@@ -505,7 +505,7 @@ app.get('/entry', (req, res) => {
     var config = {
         user: 'sa',
         password: 'password',
-        server: desktopServerName, 
+        server: laptopServerName, 
         database: 'purificationdb',
         synchronize: true,
         trustServerCertificate: true,
